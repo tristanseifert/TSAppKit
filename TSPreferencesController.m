@@ -162,14 +162,18 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
 	if(NSClassFromString(class)) {
 		NSViewController *ctrlr = [[NSClassFromString(class) alloc] init];
 		
+		// get the old view
+		NSView *oldView = self.window.contentView;
+		
 		// update content view
 		NSView *view = ctrlr.view;
-		if (self.window.contentView == view)
+		if (oldView == view)
 			return;
 		
 		NSRect windowRect = self.window.frame;
 		
-		CGFloat difference = (NSHeight([view frame]) - NSHeight([self.window.contentView frame])) * [self.window backingScaleFactor];
+		// calculate size differences
+		CGFloat difference = (NSHeight([view frame]) - NSHeight(oldView.frame)) * [self.window backingScaleFactor];
 		windowRect.origin.y -= difference;
 		windowRect.size.height += difference;
 		
