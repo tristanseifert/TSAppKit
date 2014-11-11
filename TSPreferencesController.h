@@ -22,6 +22,7 @@ extern NSString const* kTSPreferencesControllerLastPanel;
 	
 	NSArray *_panels;
 	NSMutableArray *_identifiers;
+	NSString *_currentPanel;
 	
 	NSDictionary *_configuration;
 }

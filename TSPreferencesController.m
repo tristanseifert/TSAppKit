@@ -18,7 +18,8 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
 @interface TSPreferencesController ()
 
 - (void) toolbarItemSelected:(id) sender;
-- (void) updateWithIdentifier:(NSString *) identifier andAnimation:(BOOL) animate;
+- (void) updateWithIdentifier:(NSString *) identifier
+				 andAnimation:(BOOL) shouldAnimate;
 
 @end
 
@@ -42,7 +43,9 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
     [super windowDidLoad];
 	
 	// Load general configuration
-	_configuration = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TSPreferencesPanels" ofType:@"plist"]];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"TSPreferencesPanels"
+													 ofType:@"plist"];
+	_configuration = [NSDictionary dictionaryWithContentsOfFile:path];
 	_panels = _configuration[kTSPreferencesControllerKeyPanels];
 	
 	_identifiers = [NSMutableArray new];
@@ -84,7 +87,9 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
 /**
  * Creates an NSToolbarItem from its description in the configuration file.
  */
-- (NSToolbarItem *) toolbar:(NSToolbar *) toolbar itemForItemIdentifier:(NSString *) itemIdentifier willBeInsertedIntoToolbar:(BOOL) flag {
+- (NSToolbarItem *) toolbar:(NSToolbar *) toolbar
+	  itemForItemIdentifier:(NSString *) itemIdentifier
+  willBeInsertedIntoToolbar:(BOOL) flag {
 	NSDictionary *itemInfo = nil;
 	
 	// try to find it
@@ -142,13 +147,17 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
  * Called to update the user interface with a new pane. Does the grunt work of
  * reconfiguring the window, and updating the title.
  *
- * @param animate When NO, no animation is performed, and the window will not
- * be automatically displayed.
+ * @shouldAnimate animate When NO, no animation is performed, and the window
+ * will not be automatically displayed.
  */
-- (void) updateWithIdentifier:(NSString *) identifier andAnimation:(BOOL) animate {
-	NSDictionary *itemInfo = nil;
+- (void) updateWithIdentifier:(NSString *) identifier
+				 andAnimation:(BOOL) shouldAnimate {
+	// is this panel selected?
+	if([_currentPanel isEqualToString:identifier]) return;
+	_currentPanel = identifier;
 	
 	// try to find it
+	NSDictionary *itemInfo = nil;
 	for (NSDictionary *dict in _panels) {
 		if([dict[@"identifier"] isEqualToString:identifier]) {
 			itemInfo = dict;
@@ -167,8 +176,6 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
 		
 		// update content view
 		NSView *view = ctrlr.view;
-		if (oldView == view)
-			return;
 		
 		NSRect windowRect = self.window.frame;
 		
@@ -180,16 +187,48 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
 		difference = (NSWidth([view frame]) - NSWidth([self.window.contentView frame])) * [self.window backingScaleFactor];
 		windowRect.size.width += difference;
 		
-		[view setHidden:YES];
-		[self.window setContentView:view];
-		[self.window setFrame:windowRect display:animate animate:animate];
-		[view setHidden:NO];
+		// update window title
+		self.window.title = itemInfo[@"title"];
+		
+		// if we animate the transition, animate crossfade of panels as well
+		if(shouldAnimate) {
+			// set up the new view to have an alpha of 0.0
+			view.alphaValue = 0.f;
+			NSTimeInterval resizeTime = [self.window animationResizeTime:windowRect];
+			
+			// first, fade out the old view
+			NSDictionary *oldFadeOut = @{
+										 NSViewAnimationTargetKey:oldView,
+										 NSViewAnimationEffectKey:NSViewAnimationFadeOutEffect};
+			
+			NSViewAnimation *anim = [[NSViewAnimation alloc] initWithViewAnimations:@[oldFadeOut]];
+			anim.animationBlockingMode = NSAnimationBlocking;
+			anim.duration = resizeTime / 2.f;
+			[anim startAnimation];
+			
+			// begin resize, animated edition
+			[self.window setFrame:windowRect display:YES animate:YES];
+			[self.window setContentView:view];
+			
+			// fade in current view
+			NSDictionary *newFadeIn = @{
+										NSViewAnimationTargetKey:view,
+										NSViewAnimationEffectKey:NSViewAnimationFadeInEffect};
+			
+			anim = [[NSViewAnimation alloc] initWithViewAnimations:@[newFadeIn]];
+			anim.animationBlockingMode = NSAnimationBlocking;
+			anim.duration = resizeTime / 2.f;
+			[anim startAnimation];
+			
+			// Now ensure that the view stays appeared.
+			view.alphaValue = 1.f;
+		} else {
+			[self.window setFrame:windowRect display:NO animate:NO];
+			[self.window setContentView:view];
+		}
 	} else {
 		NSAssert(false, @"Couldn't load %@", class);
 	}
-	
-	// update window title
-	self.window.title = itemInfo[@"title"];
 	
 	// store selected item
 	if([_configuration[kTSPreferencesControllerKeySaveSettings] boolValue]) {
