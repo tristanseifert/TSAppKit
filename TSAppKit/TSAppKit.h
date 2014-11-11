@@ -14,6 +14,6 @@ FOUNDATION_EXPORT double TSAppKitVersionNumber;
 //! Project version string for TSAppKit.
 FOUNDATION_EXPORT const unsigned char TSAppKitVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <TSAppKit/PublicHeader.h>
-
+// Import headers
+#import <TSAppKit/TSPreferencesController.h>
 

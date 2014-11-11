@@ -6,7 +6,7 @@ Provides a Mac OS X standard preferences window:
 
 ![alt tag](https://raw.github.com/tristanseifert/TSAppKit/master/Screenshots/prefs1.png)
 
-Information about each individual panel is read from a plist within the main bundle's Resources folder. This file should be named `SQUPreferencesPanels.plist` and contain an array of dictionaries under the key `panels.` Each of these dictionaries describes a preference panel—the first entry in the array describing the leftmost icon in the window.
+Information about each individual panel is read from a plist within the main bundle's Resources folder. This file should be named `TSPreferencesPanels.plist` and contain an array of dictionaries under the key `panels.` Each of these dictionaries describes a preference panel—the first entry in the array describing the leftmost icon in the window.
 
 Keys parsed by the preferences controller are:
 
@@ -21,3 +21,6 @@ Additionally, the root dictionary has some configuration variables as well:
 * `saveState`: When set to YES, the selected panel is stored in `NSUserDefaults` and restored next time the controller is instantiated.
 
 Panels' views may be of differing sizes, both in the X and Y directions: the controller automatically adjusts the window's size to account for this. However, it is standard practice to maintain a constant width, and change only the height.
+
+## License
+See `LICENSE.md` for licensing information. If you use this library, just add a little line somewhere that you found this helpful. A link would be nice, but it's not required—just don't go claiming it as your own work!

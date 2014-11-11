@@ -1,34 +1,34 @@
 //
-//  SQUPreferencesController.m
-//  CacophonyMachine
+//  TSPreferencesController.m
+//  TSAppKit
 //
 //  Created by Tristan Seifert on 11/9/14.
 //  Copyright (c) 2014 Tristan Seifert. All rights reserved.
 //
 
-#import "SQUPreferencesController.h"
+#import "TSPreferencesController.h"
 
 // Keys in configuration file
-NSString* kSQUPreferencesControllerKeyPanels = @"panels";
-NSString* kSQUPreferencesControllerKeySaveSettings = @"saveState";
+NSString* kTSPreferencesControllerKeyPanels = @"panels";
+NSString* kTSPreferencesControllerKeySaveSettings = @"saveState";
 
 // Keys in user defaults
-NSString* kSQUPreferencesControllerLastPanel = @"SQUPreferencesControllerLastPanel";
+NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel";
 
-@interface SQUPreferencesController ()
+@interface TSPreferencesController ()
 
 - (void) toolbarItemSelected:(id) sender;
 - (void) updateWithIdentifier:(NSString *) identifier andAnimation:(BOOL) animate;
 
 @end
 
-@implementation SQUPreferencesController
+@implementation TSPreferencesController
 
 /**
  * Custom initialiser to make life easier
  */
 - (id) init {
-	if(self = [super initWithWindowNibName:@"SQUPreferencesController"]) {
+	if(self = [super initWithWindowNibName:@"TSPreferencesController"]) {
 		
 	}
 	
@@ -42,28 +42,28 @@ NSString* kSQUPreferencesControllerLastPanel = @"SQUPreferencesControllerLastPan
     [super windowDidLoad];
 	
 	// Load general configuration
-	_configuration = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SQUPreferencesPanels" ofType:@"plist"]];
-	_panels = _configuration[kSQUPreferencesControllerKeyPanels];
+	_configuration = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TSPreferencesPanels" ofType:@"plist"]];
+	_panels = _configuration[kTSPreferencesControllerKeyPanels];
 	
 	_identifiers = [NSMutableArray new];
 	
-	NSAssert(_panels, @"Couldn't load/decode SQUPreferencesPanels.plist. See docs for more information.");
-	NSAssert(_panels, @"panels key did not exist in SQUPreferencesPanels.plist. See docs for more information.");
+	NSAssert(_panels, @"Couldn't load/decode TSPreferencesPanels.plist. See docs for more information.");
+	NSAssert(_panels, @"panels key did not exist in TSPreferencesPanels.plist. See docs for more information.");
 	
 	for (NSDictionary *dict in _panels) {
 		[_identifiers addObject:dict[@"identifier"]];
 	}
 	
 	// Set up toolbar
-	_toolbar = [[NSToolbar alloc] initWithIdentifier:@"SQUPreferencesController"];
+	_toolbar = [[NSToolbar alloc] initWithIdentifier:@"TSPreferencesController"];
 	_toolbar.allowsUserCustomization = NO;
 	_toolbar.delegate = self;
 	
 	self.window.toolbar = _toolbar;
 	
 	// If the last panel is saved, restore it. Otherwise, select first item.
-	if([_configuration[kSQUPreferencesControllerKeySaveSettings] boolValue]) {
-		NSString *lastPanel = [[NSUserDefaults standardUserDefaults] objectForKey:kSQUPreferencesControllerLastPanel];
+	if([_configuration[kTSPreferencesControllerKeySaveSettings] boolValue]) {
+		NSString *lastPanel = [[NSUserDefaults standardUserDefaults] objectForKey:kTSPreferencesControllerLastPanel];
 		
 		// validate that the panel exists
 		if([_identifiers containsObject:lastPanel]) {
@@ -72,7 +72,7 @@ NSString* kSQUPreferencesControllerLastPanel = @"SQUPreferencesControllerLastPan
 			[_toolbar setSelectedItemIdentifier:_identifiers[0]];
 		}
 	} else {
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kSQUPreferencesControllerLastPanel];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kTSPreferencesControllerLastPanel];
 		[_toolbar setSelectedItemIdentifier:_identifiers[0]];
 	}
 	
@@ -188,9 +188,9 @@ NSString* kSQUPreferencesControllerLastPanel = @"SQUPreferencesControllerLastPan
 	self.window.title = itemInfo[@"title"];
 	
 	// store selected item
-	if([_configuration[kSQUPreferencesControllerKeySaveSettings] boolValue]) {
+	if([_configuration[kTSPreferencesControllerKeySaveSettings] boolValue]) {
 		[[NSUserDefaults standardUserDefaults] setObject:identifier
-												  forKey:kSQUPreferencesControllerLastPanel];
+												  forKey:kTSPreferencesControllerLastPanel];
 	}
 }
 

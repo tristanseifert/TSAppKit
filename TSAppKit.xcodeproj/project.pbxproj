@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		6ABE16191A11A7AE00165B3A /* TSAppKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABE16181A11A7AE00165B3A /* TSAppKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6ABE16341A11A92A00165B3A /* SQUPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABE16311A11A92A00165B3A /* SQUPreferencesController.h */; };
-		6ABE16351A11A92A00165B3A /* SQUPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE16321A11A92A00165B3A /* SQUPreferencesController.m */; };
-		6ABE16361A11A92A00165B3A /* SQUPreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABE16331A11A92A00165B3A /* SQUPreferencesController.xib */; };
+		6ABE16341A11A92A00165B3A /* TSPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABE16311A11A92A00165B3A /* TSPreferencesController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6ABE16351A11A92A00165B3A /* TSPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE16321A11A92A00165B3A /* TSPreferencesController.m */; };
+		6ABE16361A11A92A00165B3A /* TSPreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABE16331A11A92A00165B3A /* TSPreferencesController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6ABE16131A11A7AE00165B3A /* TSAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABE16171A11A7AE00165B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ABE16181A11A7AE00165B3A /* TSAppKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSAppKit.h; sourceTree = "<group>"; };
-		6ABE16311A11A92A00165B3A /* SQUPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQUPreferencesController.h; sourceTree = "<group>"; };
-		6ABE16321A11A92A00165B3A /* SQUPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQUPreferencesController.m; sourceTree = "<group>"; };
-		6ABE16331A11A92A00165B3A /* SQUPreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SQUPreferencesController.xib; sourceTree = "<group>"; };
+		6ABE16311A11A92A00165B3A /* TSPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPreferencesController.h; sourceTree = "<group>"; };
+		6ABE16321A11A92A00165B3A /* TSPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPreferencesController.m; sourceTree = "<group>"; };
+		6ABE16331A11A92A00165B3A /* TSPreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSPreferencesController.xib; sourceTree = "<group>"; };
 		6ABE16381A11A9EF00165B3A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,9 +65,9 @@
 		6ABE16301A11A90C00165B3A /* Preferences Window */ = {
 			isa = PBXGroup;
 			children = (
-				6ABE16311A11A92A00165B3A /* SQUPreferencesController.h */,
-				6ABE16321A11A92A00165B3A /* SQUPreferencesController.m */,
-				6ABE16331A11A92A00165B3A /* SQUPreferencesController.xib */,
+				6ABE16311A11A92A00165B3A /* TSPreferencesController.h */,
+				6ABE16321A11A92A00165B3A /* TSPreferencesController.m */,
+				6ABE16331A11A92A00165B3A /* TSPreferencesController.xib */,
 			);
 			name = "Preferences Window";
 			sourceTree = "<group>";
@@ -88,7 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ABE16191A11A7AE00165B3A /* TSAppKit.h in Headers */,
-				6ABE16341A11A92A00165B3A /* SQUPreferencesController.h in Headers */,
+				6ABE16341A11A92A00165B3A /* TSPreferencesController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +150,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABE16361A11A92A00165B3A /* SQUPreferencesController.xib in Resources */,
+				6ABE16361A11A92A00165B3A /* TSPreferencesController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABE16351A11A92A00165B3A /* SQUPreferencesController.m in Sources */,
+				6ABE16351A11A92A00165B3A /* TSPreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +203,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 19;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -246,7 +246,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -271,7 +271,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 13;
+				DYLIB_CURRENT_VERSION = 19;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = TSAppKit/Info.plist;
@@ -288,7 +288,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 13;
+				DYLIB_CURRENT_VERSION = 19;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = TSAppKit/Info.plist;
