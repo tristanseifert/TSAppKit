@@ -8,6 +8,13 @@
 
 #import "SQUPreferencesController.h"
 
+// Keys in configuration file
+NSString* kSQUPreferencesControllerKeyPanels = @"panels";
+NSString* kSQUPreferencesControllerKeySaveSettings = @"saveState";
+
+// Keys in user defaults
+NSString* kSQUPreferencesControllerLastPanel = @"SQUPreferencesControllerLastPanel";
+
 @interface SQUPreferencesController ()
 
 - (void) toolbarItemSelected:(id) sender;
@@ -33,10 +40,15 @@
  */
 - (void) windowDidLoad {
     [super windowDidLoad];
-    
-	// Load the preference panel information
-	_panels = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SQUPreferencesPanels" ofType:@"plist"]];
+	
+	// Load general configuration
+	_configuration = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SQUPreferencesPanels" ofType:@"plist"]];
+	_panels = _configuration[kSQUPreferencesControllerKeyPanels];
+	
 	_identifiers = [NSMutableArray new];
+	
+	NSAssert(_panels, @"Couldn't load/decode SQUPreferencesPanels.plist. See docs for more information.");
+	NSAssert(_panels, @"panels key did not exist in SQUPreferencesPanels.plist. See docs for more information.");
 	
 	for (NSDictionary *dict in _panels) {
 		[_identifiers addObject:dict[@"identifier"]];
@@ -49,20 +61,29 @@
 	
 	self.window.toolbar = _toolbar;
 	
-	// is the last selection valid
-	NSString *lastPanel = [[NSUserDefaults standardUserDefaults] objectForKey:@"SQUPreferencesControllerLast"];
-	if([_identifiers containsObject:lastPanel]) {
-		[_toolbar setSelectedItemIdentifier:lastPanel];
+	// If the last panel is saved, restore it. Otherwise, select first item.
+	if([_configuration[kSQUPreferencesControllerKeySaveSettings] boolValue]) {
+		NSString *lastPanel = [[NSUserDefaults standardUserDefaults] objectForKey:kSQUPreferencesControllerLastPanel];
+		
+		// validate that the panel exists
+		if([_identifiers containsObject:lastPanel]) {
+			[_toolbar setSelectedItemIdentifier:lastPanel];
+		} else {
+			[_toolbar setSelectedItemIdentifier:_identifiers[0]];
+		}
 	} else {
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SQUPreferencesControllerLast"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kSQUPreferencesControllerLastPanel];
 		[_toolbar setSelectedItemIdentifier:_identifiers[0]];
 	}
 	
-	// update selection
+	// update the UI
 	[self updateWithIdentifier:_toolbar.selectedItemIdentifier andAnimation:NO];
 }
 
 #pragma mark - Toolbar
+/**
+ * Creates an NSToolbarItem from its description in the configuration file.
+ */
 - (NSToolbarItem *) toolbar:(NSToolbar *) toolbar itemForItemIdentifier:(NSString *) itemIdentifier willBeInsertedIntoToolbar:(BOOL) flag {
 	NSDictionary *itemInfo = nil;
 	
@@ -78,7 +99,7 @@
 	
 	// determine icon name
 	NSImage *icon = [NSImage imageNamed:itemInfo[@"icon"]];
-	if(!icon) {
+	if(!icon) {		
 		icon = [NSImage imageNamed:NSImageNamePreferencesGeneral];
 	}
 	
@@ -93,6 +114,9 @@
 	return item;
 }
 
+/**
+ * Returns the identifiers of the panels.
+ */
 - (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar {
 	return _identifiers;
 }
@@ -164,8 +188,10 @@
 	self.window.title = itemInfo[@"title"];
 	
 	// store selected item
-	[[NSUserDefaults standardUserDefaults] setObject:identifier
-											  forKey:@"SQUPreferencesControllerLast"];
+	if([_configuration[kSQUPreferencesControllerKeySaveSettings] boolValue]) {
+		[[NSUserDefaults standardUserDefaults] setObject:identifier
+												  forKey:kSQUPreferencesControllerLastPanel];
+	}
 }
 
 @end
