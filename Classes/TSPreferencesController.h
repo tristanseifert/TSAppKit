@@ -27,4 +27,10 @@ extern NSString const* kTSPreferencesControllerLastPanel;
 	NSDictionary *_configuration;
 }
 
+/**
+ * Contains a reference to teh currently displayed view controller. We are KVO
+ * compliant for this key.
+ */
+@property (nonatomic, readonly) NSViewController *currentController;
+
 @end

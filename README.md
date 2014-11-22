@@ -1,5 +1,7 @@
-	# TSAppKit
+# TSAppKit
 **TSAppKit** serves as a supplement to Apple's AppKit framework, providing several commonly-used functionalities, controls, and behaviours. This encourages code re-use, and saves time by having code only be implemented in one single place.
+
+Want to try out **TSAppKit** for yourself? Check out [the demo app.](https://github.com/tristanseifert/TSAppKitDemo)
 
 ## Preferences Window
 Provides a Mac OS X standard preferences window, implementing all the subtle behaviours users expect.

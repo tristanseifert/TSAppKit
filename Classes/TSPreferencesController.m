@@ -169,13 +169,16 @@ NSString* kTSPreferencesControllerLastPanel = @"TSPreferencesControllerLastPanel
 	// Load the controller
 	NSString *class = itemInfo[@"class"];
 	if(NSClassFromString(class)) {
-		NSViewController *ctrlr = [[NSClassFromString(class) alloc] init];
+		// allocate the controller
+		[self willChangeValueForKey:@"currentController"];
+		_currentController = [[NSClassFromString(class) alloc] init];
+		[self didChangeValueForKey:@"currentController"];
 		
 		// get the old view
 		NSView *oldView = self.window.contentView;
 		
 		// update content view
-		NSView *view = ctrlr.view;
+		NSView *view = _currentController.view;
 		
 		NSRect windowRect = self.window.frame;
 		
