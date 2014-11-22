@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "TSAppKit"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "Useful classes for Mac application development."
 
   s.description  = <<-DESC
@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/tristanseifert/TSAppKit"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -74,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/tristanseifert/TSAppKit.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/tristanseifert/TSAppKit.git", :tag => "1.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
