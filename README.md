@@ -1,10 +1,10 @@
-# TSAppKit
+	# TSAppKit
 **TSAppKit** serves as a supplement to Apple's AppKit framework, providing several commonly-used functionalities, controls, and behaviours. This encourages code re-use, and saves time by having code only be implemented in one single place.
 
 ## Preferences Window
 Provides a Mac OS X standard preferences window, implementing all the subtle behaviours users expect.
 
-![alt tag](https://raw.github.com/tristanseifert/TSAppKit/master/Screenshots/prefs1.png)
+![Screenshot of Prefs Window](https://cloud.githubusercontent.com/assets/644002/5155438/983e4eb6-724e-11e4-9c6d-40058a031f01.png)
 
 Information about each individual panel is read from a plist within the main bundle's Resources folder. This file should be named `TSPreferencesPanels.plist` and contain an array of dictionaries under the key `panels`. 
 
