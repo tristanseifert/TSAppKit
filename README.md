@@ -24,5 +24,8 @@ Additionally, the root dictionary has some configuration variables as well:
 
 Panels' views may be of differing sizes, both in the X and Y directions: the controller automatically adjusts the window's size to account for this. However, it is standard practice to maintain a constant width, and change only the height.
 
+## TSMouseTrackingView
+A custon NSView subclass that sets up a tracking rectangle for its bounds, and issues notifications when the mouse enters or leaves its bounds, as well for mouse down and mouse up events.
+
 ## License
 See `LICENSE.md` for licensing information. If you use this library, just add a little line somewhere that you found this helpful. A link would be nice, but it's not required—just don't go claiming it as your own work!
