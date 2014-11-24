@@ -1,9 +1,24 @@
 # TSAppKit
 **TSAppKit** serves as a supplement to Apple's AppKit framework, providing several commonly-used functionalities, controls, and behaviours. This encourages code re-use, and saves time by having code only be implemented in one single place.
 
+## How do I use it?
+### CocoaPods
+**TSAppKit** is available as a CocoaPod. Simply add the following to your podfile:
+
+	pod 'TSAppKit'
+	
+This will use the `master` branch, but I do my best to make this branch the most stable—I use it in several production apps myself.
+
+### Manually
+Download the repository, or add it as a subrepository in your local project, and drag `TSAppKit.xcodeproj` into your existing project.
+
+Then, under "Target Dependencies," select the TSAppKit framework. Add TSAppKit.framework to "Linked Frameworks," and add a "Copy Files" step, with the destination set to "Frameworks," to copy TSAppKit.framework.
+
+### Demo
 Want to try out **TSAppKit** for yourself? Check out [the demo app.](https://github.com/tristanseifert/TSAppKitDemo)
 
-## Preferences Window
+## Included Goodies
+### Preferences Window
 Provides a Mac OS X standard preferences window, implementing all the subtle behaviours users expect.
 
 ![Screenshot of Prefs Window](https://cloud.githubusercontent.com/assets/644002/5155438/983e4eb6-724e-11e4-9c6d-40058a031f01.png)
@@ -26,7 +41,7 @@ Additionally, the root dictionary has some configuration variables as well:
 
 Panels' views may be of differing sizes, both in the X and Y directions: the controller automatically adjusts the window's size to account for this. However, it is standard practice to maintain a constant width, and change only the height.
 
-## TSMouseTrackingView
+### TSMouseTrackingView
 A custon NSView subclass that sets up a tracking rectangle for its bounds, and issues notifications when the mouse enters or leaves its bounds, as well for mouse down and mouse up events.
 
 ## License
