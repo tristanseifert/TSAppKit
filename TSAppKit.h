@@ -17,4 +17,5 @@ FOUNDATION_EXPORT const unsigned char TSAppKitVersionString[];
 // Import headers
 #import <TSAppKit/TSPreferencesController.h>
 #import <TSAppKit/TSMouseTrackingView.h>
+#import <TSAppKit/TSCoreData.h>
 

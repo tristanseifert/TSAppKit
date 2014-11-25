@@ -44,5 +44,10 @@ Panels' views may be of differing sizes, both in the X and Y directions: the con
 ### TSMouseTrackingView
 A custon NSView subclass that sets up a tracking rectangle for its bounds, and issues notifications when the mouse enters or leaves its bounds, as well for mouse down and mouse up events.
 
+### TSCoreData
+Provides a basic CoreData stack. Exposes the managed object context, persistend store coordinator, and managed object model as properties.
+
+To use, create an object model called "TSCoreData" and include it as part of the application's bundle resources.
+
 ## License
 See `LICENSE.md` for licensing information. If you use this library, just add a little line somewhere that you found this helpful. A link would be nice, but it's not required—just don't go claiming it as your own work!
