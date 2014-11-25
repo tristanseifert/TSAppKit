@@ -13,7 +13,7 @@
 		6A1EE7F41A211F1B003EECCA /* TSPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1EE7F11A211F1B003EECCA /* TSPreferencesController.m */; };
 		6A1EE7F51A211F1B003EECCA /* TSPreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A1EE7F21A211F1B003EECCA /* TSPreferencesController.xib */; };
 		6A1EE7F91A211FB6003EECCA /* TSAppKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1EE7F71A211FB6003EECCA /* TSAppKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A3C98881A25111D00BE463A /* TSCoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3C98861A25111D00BE463A /* TSCoreData.h */; };
+		6A3C98881A25111D00BE463A /* TSCoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3C98861A25111D00BE463A /* TSCoreData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A3C98891A25111D00BE463A /* TSCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3C98871A25111D00BE463A /* TSCoreData.m */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +27,7 @@
 		6A1EE7F71A211FB6003EECCA /* TSAppKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSAppKit.h; sourceTree = SOURCE_ROOT; };
 		6A3C98861A25111D00BE463A /* TSCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSCoreData.h; path = Classes/TSCoreData.h; sourceTree = "<group>"; };
 		6A3C98871A25111D00BE463A /* TSCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSCoreData.m; path = Classes/TSCoreData.m; sourceTree = "<group>"; };
+		6A3C988B1A25136300BE463A /* TSAppKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = TSAppKit.podspec; sourceTree = "<group>"; };
 		6ABE16131A11A7AE00165B3A /* TSAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABE16381A11A9EF00165B3A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +61,14 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		6A3C988A1A25134E00BE463A /* CocoaPod */ = {
+			isa = PBXGroup;
+			children = (
+				6A3C988B1A25136300BE463A /* TSAppKit.podspec */,
+			);
+			name = CocoaPod;
+			sourceTree = "<group>";
+		};
 		6ABE16091A11A7AD00165B3A = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +77,7 @@
 				6ABE16301A11A90C00165B3A /* Preferences Window */,
 				6ABE16151A11A7AE00165B3A /* Supporting Files */,
 				6ABE16371A11A9DF00165B3A /* Documentation */,
+				6A3C988A1A25134E00BE463A /* CocoaPod */,
 				6ABE16141A11A7AE00165B3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -235,7 +245,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -278,7 +288,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -303,7 +313,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 58;
+				DYLIB_CURRENT_VERSION = 59;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -320,7 +330,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 58;
+				DYLIB_CURRENT_VERSION = 59;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Resources/Info.plist;

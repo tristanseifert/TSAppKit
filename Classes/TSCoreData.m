@@ -10,7 +10,7 @@
 
 #import "TSCoreData.h"
 
-const NSString *TSCoreDataErrorDomain = @"TSCoreDataErrorDomain";
+NSString* const TSCoreDataErrorDomain = @"TSCoreDataErrorDomain";
 
 static TSCoreData *sharedInstance = nil;
 
@@ -44,7 +44,7 @@ static TSCoreData *sharedInstance = nil;
  * Creates the managed object model, if needed. We try to find "TSCoreData.momd"
  * in the main bundle.
  */
-- (NSManagedObjectModel *)managedObjectModel {
+- (NSManagedObjectModel *) managedObjectModel {
 	if (_managedObjectModel) {
 		return _managedObjectModel;
 	}
@@ -57,7 +57,7 @@ static TSCoreData *sharedInstance = nil;
 /**
  * Creates a persistent store coordinator, with lightweight migration enabled.
  */
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+- (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
 	if (_persistentStoreCoordinator) {
 		return _persistentStoreCoordinator;
 	}
@@ -82,15 +82,16 @@ static TSCoreData *sharedInstance = nil;
 	
 	if (!shouldFail && !error) {
 		NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-		NSURL *url = [applicationDocumentsDirectory URLByAppendingPathComponent:@"OSXCoreDataObjC.storedata"];
-		if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+		NSURL *url = [applicationDocumentsDirectory URLByAppendingPathComponent:@"TSAppKit.sqlite"];
+		
+		if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
 			coordinator = nil;
 		}
 		_persistentStoreCoordinator = coordinator;
 	}
 	
+	// If there were errors, report them modally.
 	if (shouldFail || error) {
-		// Report any error we got.
 		NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 		dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
 		dict[NSLocalizedFailureReasonErrorKey] = failureReason;
@@ -102,6 +103,7 @@ static TSCoreData *sharedInstance = nil;
 		error = [NSError errorWithDomain:TSCoreDataErrorDomain code:9999 userInfo:dict];
 		[[NSApplication sharedApplication] presentError:error];
 	}
+	
 	return _persistentStoreCoordinator;
 }
 

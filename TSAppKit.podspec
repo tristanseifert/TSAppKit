@@ -16,12 +16,11 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "TSAppKit"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Useful classes for Mac application development."
 
   s.description  = <<-DESC
-                   Provides various classes and UI controls that are commonly used
-                   in apps on the Mac, including preferences windows.
+                   Provides various classes and UI controls that are commonly used in apps on the Mac, including preferences windows.
                    DESC
 
   s.homepage     = "https://github.com/tristanseifert/TSAppKit"
@@ -64,7 +63,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/tristanseifert/TSAppKit.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/tristanseifert/TSAppKit.git", :tag => "1.0.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
