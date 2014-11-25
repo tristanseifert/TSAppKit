@@ -9,7 +9,8 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 
-extern NSString* constTSCoreDataErrorDomain;
+extern NSString* const TSCoreDataErrorDomain;
+extern NSString* const TSCoreDataLoadingErrorNotification;
 
 @interface TSCoreData : NSObject
 

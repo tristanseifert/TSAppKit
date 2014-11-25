@@ -11,6 +11,7 @@
 #import "TSCoreData.h"
 
 NSString* const TSCoreDataErrorDomain = @"TSCoreDataErrorDomain";
+NSString* const TSCoreDataLoadingErrorNotification = @"TSCoreDataLoadingErrorNotification";
 
 static TSCoreData *sharedInstance = nil;
 
@@ -80,13 +81,22 @@ static TSCoreData *sharedInstance = nil;
 		[fileManager createDirectoryAtPath:[applicationDocumentsDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
 	}
 	
+	// There's no errors so far, so try to allocate a persistent store coordinator.
 	if (!shouldFail && !error) {
-		NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+		NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
 		NSURL *url = [applicationDocumentsDirectory URLByAppendingPathComponent:@"TSAppKit.sqlite"];
 		
-		if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
+		// Options to use when adding this store: lightweight migration
+		NSDictionary *options = @{
+								  NSMigratePersistentStoresAutomaticallyOption : @YES,
+								  NSInferMappingModelAutomaticallyOption : @YES
+								  };
+		
+		// Attempt to add the SQLite persistent store to the coordinator.
+		if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
 			coordinator = nil;
 		}
+		
 		_persistentStoreCoordinator = coordinator;
 	}
 	
@@ -99,9 +109,14 @@ static TSCoreData *sharedInstance = nil;
 			dict[NSUnderlyingErrorKey] = error;
 		}
 		
-		// Present the error.
-		error = [NSError errorWithDomain:TSCoreDataErrorDomain code:9999 userInfo:dict];
-		[[NSApplication sharedApplication] presentError:error];
+		// Create an NSError to encapsulate the issue
+		error = [NSError errorWithDomain:TSCoreDataErrorDomain code:9999
+								userInfo:dict];
+		
+		// Post a notification with this error
+		[[NSNotificationCenter defaultCenter] postNotificationName:TSCoreDataLoadingErrorNotification
+															object:nil
+														  userInfo:@{@"error" : error}];
 	}
 	
 	return _persistentStoreCoordinator;
